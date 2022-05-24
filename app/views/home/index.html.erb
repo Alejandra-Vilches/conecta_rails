@@ -1,2 +1,37 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%= notice %>
+
+<%= link_to "nuevo integrante", users_new_path %>
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :estado %>
+    <%= f.search_field :status_eq %>
+    <%= f.submit %>
+<% end %>
+
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= sort_link(@q, :title, "Nombre") %></th>
+      <th scope="col">Edad</th>
+      <th scope="col">Área</th>
+      <th scope="col">Cargo</th>
+      <th scope="col">Idiomas</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user|%>
+    <tr>
+      <th scope="row"><%= user.id%></th>
+      <td><%= user.name%></td>
+      <td><%= user.age%></td>
+      <td><%= user.area%></td>
+      <td><%= user.position%></td>
+      <td><%= user.languages%></td>
+      <td><%= link_to "editar", users_edit_path(user) %></td>
+    </tr>
+    <% end %>
+   
+  </tbody>
+</table>
